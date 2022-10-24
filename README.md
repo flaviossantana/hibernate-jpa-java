@@ -9,6 +9,14 @@ Em outras palavras o JPA proporciona meios de armazenar os dados presentes nos o
 
 ![](https://i0.wp.com/www.dfilitto.com.br/wp-content/uploads/2015/06/jpa_class_level_architecture.png?resize=320%2C189)
 
+## Hibernate e JPA
+Gavin King começou a pensar em uma maneira de simplificar o código e criou essa biblioteca (Hibernate) e em 2001 fez o lançamento. Mas, se percebermos, ela não tem nada a ver com o Java, ela é uma biblioteca que surgiu no mercado e que ele distribuiu gratuitamente. Assim nasceu o Hibernate, uma biblioteca famosa por fazer persistência no banco de dados como alternativa ao JDBC e ao EJB 2.
+
+![](https://1.bp.blogspot.com/-u5_RQw9hGGI/VB0HCo4XOoI/AAAAAAAAB3s/EaCTto93c48/s1600/jpa.png)
+
+## EclipseLink
+O EclipseLink é a implementação de referência da JPA. Sempre que surge uma nova versão da JPA, o EclipseLink já está implementando, pois, é nele que são feitos os testes e ele sai com a nova versão da JPA. Ele é a implementação de referência, porém, o Hibernate é a principal, a mais popular no mercado. Por isso, neste curso trabalharemos com o Hibernate como implementação da JPA.
+![](https://pbs.twimg.com/media/Ffg4Hg3X0AE49zP?format=png&name=900x900)
 
 ### Referências
 [JPA – O QUE É? PARA QUE SERVE? COMO IMPLEMENTAR UM SISTEMA SIMPLES?](https://dfilitto.com.br/desenvolvimento/jpa-o-que-e-para-que-serve-como-implementar-um-sistema/)
