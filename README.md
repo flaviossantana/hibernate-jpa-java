@@ -10,7 +10,8 @@ Em outras palavras o JPA proporciona meios de armazenar os dados presentes nos o
 ![](https://i0.wp.com/www.dfilitto.com.br/wp-content/uploads/2015/06/jpa_class_level_architecture.png?resize=320%2C189)
 
 ## Hibernate e JPA
-Gavin King começou a pensar em uma maneira de simplificar o código e criou essa biblioteca (Hibernate) e em 2001 fez o lançamento. Mas, se percebermos, ela não tem nada a ver com o Java, ela é uma biblioteca que surgiu no mercado e que ele distribuiu gratuitamente. Assim nasceu o Hibernate, uma biblioteca famosa por fazer persistência no banco de dados como alternativa ao JDBC e ao EJB 2.
+- Gavin King começou a pensar em uma maneira de simplificar o código e criou essa biblioteca (Hibernate) e em 2001 fez o lançamento. Mas, se percebermos, ela não tem nada a ver com o Java, ela é uma biblioteca que surgiu no mercado e que ele distribuiu gratuitamente. Assim nasceu o Hibernate, uma biblioteca famosa por fazer persistência no banco de dados como alternativa ao JDBC e ao EJB 2.
+- JPA é uma especificação e Hibernate é uma de suas implementações
 
 ![](https://1.bp.blogspot.com/-u5_RQw9hGGI/VB0HCo4XOoI/AAAAAAAAB3s/EaCTto93c48/s1600/jpa.png)
 
