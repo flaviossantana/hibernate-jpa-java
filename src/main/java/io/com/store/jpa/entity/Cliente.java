@@ -18,7 +18,7 @@ public class Cliente {
     @Column(name = "numr_cpf")
     private String cpf;
 
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente() {
@@ -46,4 +46,15 @@ public class Cliente {
         this.pedidos.add(pedido);
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

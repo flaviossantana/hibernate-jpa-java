@@ -1,13 +1,19 @@
 package io.com.store.jpa.builder;
 
+import io.com.store.jpa.dao.ProdutoDAO;
+import io.com.store.jpa.dao.repository.ProdutoRepository;
 import io.com.store.jpa.entity.Categoria;
 import io.com.store.jpa.entity.Produto;
 
+import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 
 public class ProdutoBuilder {
 
     private Produto produto = new Produto();
+    private boolean isPersisted = false;
+
+    private ProdutoRepository produtoRepository;
 
     private ProdutoBuilder() {
         super();
@@ -43,7 +49,16 @@ public class ProdutoBuilder {
     }
 
     public Produto build() {
+        if(isPersisted) {
+            produtoRepository.salvar(produto);
+        }
+
         return produto;
     }
 
+    public ProdutoBuilder persisted(EntityManager em) {
+        this.produtoRepository = new ProdutoDAO(em);
+        this.isPersisted = true;
+        return this;
+    }
 }

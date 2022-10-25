@@ -59,4 +59,13 @@ public class Pedido {
         this.itens.add(item);
     }
 
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 }
