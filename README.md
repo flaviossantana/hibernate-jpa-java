@@ -24,7 +24,7 @@ O EclipseLink é a implementação de referência da JPA. Sempre que surge uma n
   - Transitório
   - Persistente
   - Desanexado
-  - Removido
+  - Removido 
 ![](https://media.geeksforgeeks.org/wp-content/uploads/20210626212614/GFGHibernateLifecycle.png)
 
 ### Referências
