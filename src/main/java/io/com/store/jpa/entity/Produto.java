@@ -18,7 +18,7 @@ public class Produto {
     private String descricao;
 
     @Column(name = "vlr_preco")
-    private BigDecimal valor;
+    private BigDecimal preco;
 
     public Produto() {
         super();
@@ -36,8 +36,8 @@ public class Produto {
         return descricao;
     }
 
-    public BigDecimal getValor() {
-        return valor;
+    public BigDecimal getPreco() {
+        return preco;
     }
 
     public void setId(Long id) {
@@ -52,7 +52,7 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
+    public void setPreco(BigDecimal valor) {
+        this.preco = valor;
     }
 }
