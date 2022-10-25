@@ -28,6 +28,10 @@ O EclipseLink é a implementação de referência da JPA. Sempre que surge uma n
 
 ![](https://github.com/flaviossantana/hibernate-jpa-java/blob/main/src/main/resources/asset/ciclo-e-vida-jpa.png?raw=true)  
 
+## Mapeamento de Entidades
+
+
+
 ### Referências
 - https://github.com/flaviossantana/hibernate-jpa-java
 - https://dfilitto.com.br/desenvolvimento/jpa-o-que-e-para-que-serve-como-implementar-um-sistema
