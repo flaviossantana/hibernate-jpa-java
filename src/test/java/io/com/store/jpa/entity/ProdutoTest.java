@@ -11,6 +11,7 @@ import junit.framework.TestCase;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ProdutoTest extends TestCase {
@@ -303,5 +304,33 @@ public class ProdutoTest extends TestCase {
             assertEquals(galaxyS21UltraBD.getPreco(), galaxyS21Ultra.getPreco());
 
     }
+
+    public void testDeveriaBuscarPrecoDoProdutoComNome(){
+        EntityManager em = JPAUtil.getEntityManager();
+        ProdutoRepository produtoRepository = new ProdutoDAO(em);
+
+        Produto galaxyS21Plus = ProdutoBuilder.init()
+                .nome("GALAXY S21+")
+                .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
+                .preco("1000.00")
+                .build();
+
+        Produto galaxyS21Ultra = ProdutoBuilder.init()
+                .nome("GALAXY S21 Ultra")
+                .descricao("SMARTPHONE SAMSUMG GALAXY S21 Ultra 512GB")
+                .preco("5000.00")
+                .build();
+
+        em.getTransaction().begin();
+        produtoRepository.salvar(galaxyS21Plus);
+        produtoRepository.salvar(galaxyS21Ultra);
+
+        BigDecimal preco = produtoRepository.buscarPrecoPorNome(galaxyS21Plus.getNome());
+        em.close();
+
+        assertNotNull(preco);
+        assertEquals(galaxyS21Plus.getPreco(), preco);
+    }
+
 
 }

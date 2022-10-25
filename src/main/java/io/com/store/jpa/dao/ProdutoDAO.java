@@ -4,6 +4,7 @@ import io.com.store.jpa.dao.repository.ProdutoRepository;
 import io.com.store.jpa.entity.Produto;
 
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ProdutoDAO implements ProdutoRepository {
@@ -56,6 +57,14 @@ public class ProdutoDAO implements ProdutoRepository {
                 .createQuery("SELECT p FROM Produto p WHERE p.categoria.nome = :nome", Produto.class)
                 .setParameter("nome", nome)
                 .getResultList();
+    }
+
+    @Override
+    public BigDecimal buscarPrecoPorNome(String nome) {
+        return entityManager
+                .createQuery("SELECT p.preco FROM Produto p WHERE p.nome = :nome", BigDecimal.class)
+                .setParameter("nome", nome)
+                .getSingleResult();
     }
 
 }

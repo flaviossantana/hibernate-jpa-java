@@ -2,6 +2,7 @@ package io.com.store.jpa.dao.repository;
 
 import io.com.store.jpa.entity.Produto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ProdutoRepository extends BaseRepository<Produto> {
@@ -11,5 +12,7 @@ public interface ProdutoRepository extends BaseRepository<Produto> {
     List<Produto> buscarPorNome(String nome);
 
     List<Produto> buscarPorNomeCategoria(String nome);
+
+    BigDecimal buscarPrecoPorNome(String nome);
 }
 
