@@ -29,6 +29,7 @@ O EclipseLink é a implementação de referência da JPA. Sempre que surge uma n
 ![](https://github.com/flaviossantana/hibernate-jpa-java/blob/main/src/main/resources/asset/ciclo-e-vida-jpa.png?raw=true)  
 
 ### Referências
-[JPA – O QUE É? PARA QUE SERVE? COMO IMPLEMENTAR UM SISTEMA SIMPLES?](https://dfilitto.com.br/desenvolvimento/jpa-o-que-e-para-que-serve-como-implementar-um-sistema/)
-[CICLO DE VIDA DO HIBERNATE](https://acervolima.com/ciclo-de-vida-do-hibernate/)
+- https://github.com/flaviossantana/hibernate-jpa-java
+- https://dfilitto.com.br/desenvolvimento/jpa-o-que-e-para-que-serve-como-implementar-um-sistema
+- https://acervolima.com/ciclo-de-vida-do-hibernate
 
