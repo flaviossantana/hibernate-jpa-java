@@ -108,6 +108,18 @@ public class ProdutoTest extends TestCase {
         produto.setDescricao("SMARTPHONE SAMSUMG GALAXY S21+ ULTRA 256GB 12GB RAM");
         entityManager.flush();
 
+        //IRÁ COLOCAR NO ESTADO DE DETACHED
+        entityManager.clear();
+
+        //IRÁ DEVOLVER O OBJETO NO ESTADO MANAGED (SELECT)
+        produto = entityManager.merge(produto);
+
+        //IRÁ COLOCAR O OBJETO NO ESTADO REMOVED (DELETE)
+        entityManager.remove(produto);
+
+        //IRÁ FAZER UM COMMIT NO BANCO DE DADOS
+        entityManager.flush();
+
         assertNotNull(produto.getId());
     }
 
