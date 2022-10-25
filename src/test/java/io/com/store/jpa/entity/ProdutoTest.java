@@ -1,7 +1,9 @@
 package io.com.store.jpa.entity;
 
 import io.com.store.jpa.builder.ProdutoBuilder;
+import io.com.store.jpa.dao.CategoriaDAO;
 import io.com.store.jpa.dao.ProdutoDAO;
+import io.com.store.jpa.dao.repository.CategoriaRepository;
 import io.com.store.jpa.dao.repository.ProdutoRepository;
 import io.com.store.jpa.dao.util.JPAUtil;
 import junit.framework.TestCase;
@@ -52,17 +54,24 @@ public class ProdutoTest extends TestCase {
 
     public void testDeveriaCadastarProdutoComCategoria() {
 
+        Categoria smartphone = new Categoria("SMARTPHONE");
+
+
         Produto produto = ProdutoBuilder.init()
                 .nome("GALAXY S21+")
                 .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
                 .preco("1000.00")
-                .categoria(Categoria.CELULARES)
+                .categoria(smartphone)
                 .build();
+
+
 
         EntityManager em = JPAUtil.getEntityManager();
         ProdutoRepository produtoRepository = new ProdutoDAO(em);
+        CategoriaRepository categoriaRepository = new CategoriaDAO(em);
 
         em.getTransaction().begin();
+        categoriaRepository.salvar(smartphone);
         produtoRepository.salvar(produto);
         em.getTransaction().commit();
         em.close();
