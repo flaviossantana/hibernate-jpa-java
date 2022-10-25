@@ -3,6 +3,7 @@ package io.com.store.jpa.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "pedidos")
@@ -18,8 +19,11 @@ public class Pedido {
     @Column(name = "vlr_total")
     private BigDecimal total;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ItemPedido> itens;
 
     public Pedido() {
         super();
@@ -44,4 +48,13 @@ public class Pedido {
     public Cliente getCliente() {
         return cliente;
     }
+
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void addItens(ItemPedido item) {
+        this.itens.add(item);
+    }
+
 }
