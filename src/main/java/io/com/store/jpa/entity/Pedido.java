@@ -3,6 +3,7 @@ package io.com.store.jpa.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,7 @@ public class Pedido {
     private Cliente cliente;
 
     @OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ItemPedido> itens;
+    private List<ItemPedido> itens = new ArrayList<>();
 
     public Pedido() {
         super();
@@ -53,7 +54,8 @@ public class Pedido {
         return itens;
     }
 
-    public void addItens(ItemPedido item) {
+    public void addItem(ItemPedido item) {
+        item.setPedido(this);
         this.itens.add(item);
     }
 

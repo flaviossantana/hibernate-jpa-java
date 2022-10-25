@@ -29,9 +29,13 @@ public class ItemPedido {
         super();
     }
 
-    public ItemPedido(Integer quantidade, Pedido pedido, Produto produto) {
+    public ItemPedido(Integer quantidade, Produto produto) {
         this.quantidade = quantidade;
-        this.pedido = pedido;
         this.produto = produto;
+        this.valorUnitario = produto.getPreco();
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 }
