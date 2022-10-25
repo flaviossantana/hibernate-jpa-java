@@ -2,6 +2,8 @@ package io.com.store.jpa.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "produtos")
@@ -19,6 +21,12 @@ public class Produto {
 
     @Column(name = "vlr_preco")
     private BigDecimal preco;
+
+    @Column(name = "data_cadastro")
+    private LocalDate dataCadastro = LocalDate.now();
+
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
 
     public Produto() {
         super();
@@ -54,5 +62,22 @@ public class Produto {
 
     public void setPreco(BigDecimal valor) {
         this.preco = valor;
+    }
+
+
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDate dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

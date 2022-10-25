@@ -50,4 +50,24 @@ public class ProdutoTest extends TestCase {
         assertNotNull(produto.getId());
     }
 
+    public void testDeveriaCadastarProdutoComCategoria() {
+
+        Produto produto = ProdutoBuilder.init()
+                .nome("GALAXY S21+")
+                .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
+                .preco("1000.00")
+                .categoria(Categoria.CELULARES)
+                .build();
+
+        EntityManager em = JPAUtil.getEntityManager();
+        ProdutoRepository produtoRepository = new ProdutoDAO(em);
+
+        em.getTransaction().begin();
+        produtoRepository.salvar(produto);
+        em.getTransaction().commit();
+        em.close();
+
+        assertNotNull(produto.getId());
+    }
+
 }

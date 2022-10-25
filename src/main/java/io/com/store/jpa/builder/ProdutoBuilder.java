@@ -1,5 +1,6 @@
 package io.com.store.jpa.builder;
 
+import io.com.store.jpa.entity.Categoria;
 import io.com.store.jpa.entity.Produto;
 
 import java.math.BigDecimal;
@@ -28,6 +29,11 @@ public class ProdutoBuilder {
 
     public ProdutoBuilder preco(String valor) {
         produto.setPreco(new BigDecimal(valor));
+        return this;
+    }
+
+    public ProdutoBuilder categoria(Categoria categoria) {
+        produto.setCategoria(categoria);
         return this;
     }
 
