@@ -19,6 +19,15 @@ Em outras palavras o JPA proporciona meios de armazenar os dados presentes nos o
 O EclipseLink é a implementação de referência da JPA. Sempre que surge uma nova versão da JPA, o EclipseLink já está implementando, pois, é nele que são feitos os testes e ele sai com a nova versão da JPA. Ele é a implementação de referência, porém, o Hibernate é a principal, a mais popular no mercado. Por isso, neste curso trabalharemos com o Hibernate como implementação da JPA.
 ![](https://pbs.twimg.com/media/Ffg4Hg3X0AE49zP?format=png&name=900x900)
 
+## Ciclo de Vida de uma Entidade
+- Existem principalmente quatro estados do ciclo de vida do Hibernate:
+  - Transitório
+  - Persistente
+  - Desanexado
+  - Removido
+![](https://media.geeksforgeeks.org/wp-content/uploads/20210626212614/GFGHibernateLifecycle.png)
+
 ### Referências
 [JPA – O QUE É? PARA QUE SERVE? COMO IMPLEMENTAR UM SISTEMA SIMPLES?](https://dfilitto.com.br/desenvolvimento/jpa-o-que-e-para-que-serve-como-implementar-um-sistema/)
+[CICLO DE VIDA DO HIBERNATE](https://acervolima.com/ciclo-de-vida-do-hibernate/)
 
