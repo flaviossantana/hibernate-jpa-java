@@ -79,4 +79,36 @@ public class ProdutoTest extends TestCase {
         assertNotNull(produto.getId());
     }
 
+    public void testCicloDeVidaJPA() {
+
+        Produto produto = ProdutoBuilder.init()
+                .nome("GALAXY S21+")
+                .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
+                .preco("1000.00")
+                .build();
+
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("store-jpa");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
+
+        //IRÁ INSERIR UM NOVO REGISTRO NO BANCO DE DADOS (INSERT)
+        entityManager.persist(produto);
+
+        //IRÁ FAZER UM UPDATE NO BANCO DE DADOS (UPDATE)
+        produto.setNome("GALAXY S21+ ULTRA");
+
+        entityManager.flush();
+        entityManager.clear();
+
+        //IRÁ DEVOLVER O OBJETO NO ESTADO MANAGED (SELECT)
+        produto = entityManager.merge(produto);
+
+        //IRÁ FAZER UM UPDATE NO BANCO DE DADOS (UPDATE)
+        produto.setDescricao("SMARTPHONE SAMSUMG GALAXY S21+ ULTRA 256GB 12GB RAM");
+        entityManager.flush();
+
+        assertNotNull(produto.getId());
+    }
+
 }
