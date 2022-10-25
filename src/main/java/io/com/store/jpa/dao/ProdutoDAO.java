@@ -4,6 +4,7 @@ import io.com.store.jpa.dao.repository.ProdutoRepository;
 import io.com.store.jpa.entity.Produto;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class ProdutoDAO implements ProdutoRepository {
 
@@ -18,4 +19,26 @@ public class ProdutoDAO implements ProdutoRepository {
         entityManager.persist(produto);
     }
 
+    @Override
+    public void atualizar(Produto produto) {
+        entityManager.merge(produto);
+    }
+
+    @Override
+    public void excluir(Produto produto) {
+        produto = entityManager.merge(produto);
+        entityManager.remove(produto);
+    }
+
+    @Override
+    public Produto buscarPorId(long id) {
+        return entityManager.find(Produto.class, id);
+    }
+
+    @Override
+    public List<Produto> buscarTodos() {
+        return entityManager
+                .createQuery("SELECT p FROM Produto p", Produto.class)
+                .getResultList();
+    }
 }

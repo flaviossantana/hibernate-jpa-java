@@ -3,7 +3,6 @@ package io.com.store.jpa.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "produtos")
@@ -48,10 +47,6 @@ public class Produto {
         return preco;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -62,19 +57,6 @@ public class Produto {
 
     public void setPreco(BigDecimal valor) {
         this.preco = valor;
-    }
-
-
-    public LocalDate getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(LocalDate dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
     }
 
     public void setCategoria(Categoria categoria) {

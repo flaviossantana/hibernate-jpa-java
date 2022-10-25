@@ -2,7 +2,6 @@ package io.com.store.jpa.dao;
 
 import io.com.store.jpa.dao.repository.CategoriaRepository;
 import io.com.store.jpa.entity.Categoria;
-import io.com.store.jpa.entity.Produto;
 
 import javax.persistence.EntityManager;
 
@@ -17,6 +16,17 @@ public class CategoriaDAO implements CategoriaRepository {
     @Override
     public void salvar(Categoria categoria) {
         entityManager.persist(categoria);
+    }
+
+    @Override
+    public void atualizar(Categoria categoria) {
+        entityManager.merge(categoria);
+    }
+
+    @Override
+    public void excluir(Categoria categoria) {
+        categoria = entityManager.merge(categoria);
+        entityManager.remove(categoria);
     }
 
 }
