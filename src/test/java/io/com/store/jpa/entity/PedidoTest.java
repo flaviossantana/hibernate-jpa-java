@@ -15,52 +15,52 @@ public class PedidoTest extends TestCase {
     private Produto galaxyS21Plus;
     private Produto galaxyS21Ultra;
     private Cliente joaoDaSilva;
+    private EntityManager em;
 
-    public void setUp() throws Exception {
-        EntityManager em = JPAUtil.getEntityManager();
-        em.getTransaction().begin();
-        criarProdutos(em);
-        criarCliente(em);
-        em.getTransaction().commit();
-        em.close();
-
+    public void setUp() {
+        this.em = JPAUtil.getEntityManager();
+        this.em.getTransaction().begin();
+        criarProdutos();
+        criarCliente();
+        this.em.getTransaction().commit();
     }
 
-    private void criarCliente(EntityManager em) {
+    protected void tearDown()  {
+        em.close();
+    }
+
+    private void criarCliente() {
         joaoDaSilva = ClienteBuilder
                 .init()
                 .nome("João da Silva")
                 .cpf("55412287450")
-                .persisted(em)
+                .persisted(this.em)
                 .build();
     }
 
-    private void criarProdutos(EntityManager em) {
-        criarProdutoGalaxyS21Plus(em);
-        criarProdutoGalaxyS21Ultra(em);
+    private void criarProdutos() {
+        criarProdutoGalaxyS21Plus();
+        criarProdutoGalaxyS21Ultra();
     }
 
-    private void criarProdutoGalaxyS21Ultra(EntityManager em) {
+    private void criarProdutoGalaxyS21Ultra() {
         galaxyS21Ultra = ProdutoBuilder.init()
                 .nome("GALAXY S21 Ultra")
                 .descricao("SMARTPHONE SAMSUMG GALAXY S21 Ultra 512GB")
                 .preco("5000.00")
                 .nomeCategoria("SMARTPHONES")
-                .persisted(em)
+                .persisted(this.em)
                 .build();
     }
 
-    private void criarProdutoGalaxyS21Plus(EntityManager em) {
+    private void criarProdutoGalaxyS21Plus() {
         galaxyS21Plus = ProdutoBuilder.init()
                 .nome("GALAXY S21+")
                 .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
                 .preco("1000.00")
                 .nomeCategoria("SMARTPHONES")
-                .persisted(em)
+                .persisted(this.em)
                 .build();
-    }
-
-    public void tearDown() throws Exception {
     }
 
     public void testDeveriaInstanciarPedido() {
@@ -72,12 +72,10 @@ public class PedidoTest extends TestCase {
                 .item(2, galaxyS21Ultra)
                 .build();
 
-        EntityManager entityManager = JPAUtil.getEntityManager();
-
-        entityManager.getTransaction().begin();
-        PedidoRepository pedidoRepository = new PedidoDAO(entityManager);
+        em.getTransaction().begin();
+        PedidoRepository pedidoRepository = new PedidoDAO(em);
         pedidoRepository.salvar(pedido);
-        entityManager.flush();
+        em.getTransaction().commit();
 
     }
 }
