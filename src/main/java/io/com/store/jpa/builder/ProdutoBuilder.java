@@ -37,6 +37,11 @@ public class ProdutoBuilder {
         return this;
     }
 
+    public ProdutoBuilder nomeCategoria(String nomeCategoria) {
+        produto.setCategoria(new Categoria(nomeCategoria));
+        return this;
+    }
+
     public Produto build() {
         return produto;
     }

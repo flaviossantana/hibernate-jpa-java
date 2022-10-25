@@ -41,4 +41,21 @@ public class ProdutoDAO implements ProdutoRepository {
                 .createQuery("SELECT p FROM Produto p", Produto.class)
                 .getResultList();
     }
+
+    @Override
+    public List<Produto> buscarPorNome(String nome) {
+        return entityManager
+                .createQuery("SELECT p FROM Produto p WHERE p.nome = :nome", Produto.class)
+                .setParameter("nome", nome)
+                .getResultList();
+    }
+
+    @Override
+    public List<Produto> buscarPorNomeCategoria(String nome) {
+        return entityManager
+                .createQuery("SELECT p FROM Produto p WHERE p.categoria.nome = :nome", Produto.class)
+                .setParameter("nome", nome)
+                .getResultList();
+    }
+
 }

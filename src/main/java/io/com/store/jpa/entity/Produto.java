@@ -24,7 +24,7 @@ public class Produto {
     @Column(name = "data_cadastro")
     private LocalDate dataCadastro = LocalDate.now();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Categoria categoria;
 
     public Produto() {
@@ -61,5 +61,9 @@ public class Produto {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public String getNomeCategoria() {
+        return categoria.getNome();
     }
 }
