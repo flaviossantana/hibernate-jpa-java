@@ -153,6 +153,7 @@ public class ProdutoTest extends TestCase {
         EntityManager em = JPAUtil.getEntityManager();
         ProdutoRepository produtoRepository = new ProdutoDAO(em);
 
+        em.getTransaction().begin();
         produtoRepository.buscarTodos().forEach(p -> produtoRepository.excluir(p));
 
         Produto galaxyS21Plus = ProdutoBuilder.init()
@@ -167,9 +168,9 @@ public class ProdutoTest extends TestCase {
                 .preco("5000.00")
                 .build();
 
-        em.getTransaction().begin();
         produtoRepository.salvar(galaxyS21Plus);
         produtoRepository.salvar(galaxyS21Ultra);
+        em.flush();
 
         List<Produto> produtos = produtoRepository.buscarTodos();
         em.close();
@@ -258,56 +259,56 @@ public class ProdutoTest extends TestCase {
 
     public void testeDeveriaBuscarProdutoPorCategoria() {
 
-            EntityManager em = JPAUtil.getEntityManager();
-            ProdutoRepository produtoRepository = new ProdutoDAO(em);
+        EntityManager em = JPAUtil.getEntityManager();
+        ProdutoRepository produtoRepository = new ProdutoDAO(em);
 
-            Produto galaxyS21Plus = ProdutoBuilder.init()
-                    .nome("GALAXY S21+")
-                    .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
-                    .preco("1000.00")
-                    .nomeCategoria("CELULARES")
-                    .build();
+        Produto galaxyS21Plus = ProdutoBuilder.init()
+                .nome("GALAXY S21+")
+                .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
+                .preco("1000.00")
+                .nomeCategoria("CELULARES")
+                .build();
 
-            Produto galaxyS21Ultra = ProdutoBuilder.init()
-                    .nome("GALAXY S21 Ultra")
-                    .descricao("SMARTPHONE SAMSUMG GALAXY S21 Ultra 512GB")
-                    .preco("5000.00")
-                    .nomeCategoria("CELULARES")
-                    .build();
+        Produto galaxyS21Ultra = ProdutoBuilder.init()
+                .nome("GALAXY S21 Ultra")
+                .descricao("SMARTPHONE SAMSUMG GALAXY S21 Ultra 512GB")
+                .preco("5000.00")
+                .nomeCategoria("CELULARES")
+                .build();
 
-            Produto macbookPro = ProdutoBuilder.init()
-                    .nome("MACBOOK PRO")
-                    .descricao("NOTEBOOK APPLE MACBOOK PRO 16")
-                    .preco("10000.00")
-                    .nomeCategoria("INFORMATICA")
-                    .build();
+        Produto macbookPro = ProdutoBuilder.init()
+                .nome("MACBOOK PRO")
+                .descricao("NOTEBOOK APPLE MACBOOK PRO 16")
+                .preco("10000.00")
+                .nomeCategoria("INFORMATICA")
+                .build();
 
-            em.getTransaction().begin();
-            produtoRepository.salvar(galaxyS21Plus);
-            produtoRepository.salvar(galaxyS21Ultra);
-            produtoRepository.salvar(macbookPro);
+        em.getTransaction().begin();
+        produtoRepository.salvar(galaxyS21Plus);
+        produtoRepository.salvar(galaxyS21Ultra);
+        produtoRepository.salvar(macbookPro);
 
-            List<Produto> produtos = produtoRepository.buscarPorNomeCategoria(galaxyS21Plus.getNomeCategoria());
-            em.close();
+        List<Produto> produtos = produtoRepository.buscarPorNomeCategoria(galaxyS21Plus.getNomeCategoria());
+        em.close();
 
-            assertNotNull(produtos);
-            assertEquals(2, produtos.size());
+        assertNotNull(produtos);
+        assertEquals(2, produtos.size());
 
-            Produto galaxyS21PlusBD = produtos.get(0);
+        Produto galaxyS21PlusBD = produtos.get(0);
 
-            assertEquals(galaxyS21PlusBD.getNome(), galaxyS21Plus.getNome());
-            assertEquals(galaxyS21PlusBD.getDescricao(), galaxyS21Plus.getDescricao());
-            assertEquals(galaxyS21PlusBD.getPreco(), galaxyS21Plus.getPreco());
+        assertEquals(galaxyS21PlusBD.getNome(), galaxyS21Plus.getNome());
+        assertEquals(galaxyS21PlusBD.getDescricao(), galaxyS21Plus.getDescricao());
+        assertEquals(galaxyS21PlusBD.getPreco(), galaxyS21Plus.getPreco());
 
-            Produto galaxyS21UltraBD = produtos.get(1);
+        Produto galaxyS21UltraBD = produtos.get(1);
 
-            assertEquals(galaxyS21UltraBD.getNome(), galaxyS21Ultra.getNome());
-            assertEquals(galaxyS21UltraBD.getDescricao(), galaxyS21Ultra.getDescricao());
-            assertEquals(galaxyS21UltraBD.getPreco(), galaxyS21Ultra.getPreco());
+        assertEquals(galaxyS21UltraBD.getNome(), galaxyS21Ultra.getNome());
+        assertEquals(galaxyS21UltraBD.getDescricao(), galaxyS21Ultra.getDescricao());
+        assertEquals(galaxyS21UltraBD.getPreco(), galaxyS21Ultra.getPreco());
 
     }
 
-    public void testDeveriaBuscarPrecoDoProdutoComNome(){
+    public void testDeveriaBuscarPrecoDoProdutoComNome() {
         EntityManager em = JPAUtil.getEntityManager();
         ProdutoRepository produtoRepository = new ProdutoDAO(em);
 
@@ -334,12 +335,14 @@ public class ProdutoTest extends TestCase {
         assertEquals(galaxyS21Plus.getPreco(), preco);
     }
 
-    public void testDeveriaBuscarPrecoDoProdutoComNomeNamedQuery(){
+    public void testDeveriaBuscarPrecoDoProdutoComNomeNamedQuery() {
+
         EntityManager em = JPAUtil.getEntityManager();
         ProdutoRepository produtoRepository = new ProdutoDAO(em);
+        em.getTransaction().begin();
 
         Produto galaxyS21Plus = ProdutoBuilder.init()
-                .nome("GALAXY S21+")
+                .nome("GALAXY S21+ NAMED QUERY")
                 .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
                 .preco("1000.00")
                 .build();
@@ -350,7 +353,6 @@ public class ProdutoTest extends TestCase {
                 .preco("5000.00")
                 .build();
 
-        em.getTransaction().begin();
         produtoRepository.salvar(galaxyS21Plus);
         produtoRepository.salvar(galaxyS21Ultra);
 
