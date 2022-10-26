@@ -11,5 +11,7 @@ public interface PedidoRepository extends BaseRepository<Pedido> {
     List<Pedido> buscarTodos();
     BigDecimal valorTotalDeTodasAsVendas();
     List<RelatorioVendasVO> relatorioDeProdutoQuantidadeEUltimaVenda();
+
+    Pedido buscarPedidoComCliente(Long id);
 }
 

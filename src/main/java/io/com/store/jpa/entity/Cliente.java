@@ -54,7 +54,7 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 }

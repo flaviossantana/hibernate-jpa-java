@@ -75,4 +75,40 @@ public class PerformanceTest extends TestCase {
         assertEquals(2, pedidoRecuperado.getItens().size());
     }
 
+    public void testDeveriaFazerConsultaPedidoTrazendoClientenComJoinFetch() {
+        Pedido pedido = PedidoBuilder.init()
+                .cliente(joaoDaSilva)
+                .item(10, galaxyS21Plus)
+                .item(5, galaxyS21Ultra)
+                .build();
+
+        this.em.getTransaction().begin();
+        PedidoRepository pedidoDAO = new PedidoDAO(em);
+        pedidoDAO.salvar(pedido);
+        this.em.flush();
+
+        Pedido pedidoRecuperado = pedidoDAO.buscarPedidoComCliente(pedido.getId());
+        this.em.close();
+
+        assertEquals(joaoDaSilva.getNome(), pedidoRecuperado.getCliente().getNome());
+    }
+
+    public void testDeveriaLancarExcecaoDeLazyInitializationPorNaoFaze() {
+        Pedido pedido = PedidoBuilder.init()
+                .cliente(joaoDaSilva)
+                .item(10, galaxyS21Plus)
+                .item(5, galaxyS21Ultra)
+                .build();
+
+        this.em.getTransaction().begin();
+        PedidoRepository pedidoDAO = new PedidoDAO(em);
+        pedidoDAO.salvar(pedido);
+        this.em.flush();
+
+        Pedido pedidoRecuperado = pedidoDAO.buscarPorId(pedido.getId());
+        this.em.close();
+
+        assertEquals(joaoDaSilva.getNome(), pedidoRecuperado.getCliente().getNome());
+    }
+
 }
