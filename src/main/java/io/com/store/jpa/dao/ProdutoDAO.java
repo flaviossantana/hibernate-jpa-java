@@ -67,4 +67,12 @@ public class ProdutoDAO implements ProdutoRepository {
                 .getSingleResult();
     }
 
+    @Override
+    public BigDecimal buscarPrecoPorNomeNamedQuery(String nome) {
+        return entityManager
+                .createNamedQuery("produto.buscarPrecoPorNome", BigDecimal.class)
+                .setParameter("nome", nome)
+                .getSingleResult();
+    }
+
 }
