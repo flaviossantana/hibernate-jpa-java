@@ -7,5 +7,7 @@ import java.util.List;
 public interface PedidoRepository extends BaseRepository<Pedido> {
     Pedido buscarPorId(long l);
     List<Pedido> buscarTodos();
+
+    List<Object[]> relatorioDeProdutoQuantidadeEUltimaVenda();
 }
 

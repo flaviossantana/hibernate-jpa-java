@@ -9,6 +9,7 @@ import io.com.store.jpa.dao.util.JPAUtil;
 import junit.framework.TestCase;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class PedidoTest extends TestCase {
 
@@ -78,4 +79,37 @@ public class PedidoTest extends TestCase {
         em.getTransaction().commit();
 
     }
+
+    public void testeDeveriaExecutarRelatorioDeProdutoQuantidadeEUltimaVenda(){
+
+        Pedido pedido = PedidoBuilder
+                .init()
+                .cliente(joaoDaSilva)
+                .item(1, galaxyS21Plus)
+                .item(2, galaxyS21Ultra)
+                .item(10, ProdutoBuilder.init()
+                        .nome("GALAXY S22 NOTE")
+                        .descricao("SMARTPHONE SAMSUMG GALAXY S22 NOTE 1TB")
+                        .preco("7890.99")
+                        .nomeCategoria("SMARTPHONES")
+                        .persisted(this.em)
+                        .build())
+                .build();
+
+        em.getTransaction().begin();
+        PedidoRepository pedidoRepository = new PedidoDAO(em);
+        pedidoRepository.salvar(pedido);
+        em.getTransaction().commit();
+
+        List<Object[]> objects = pedidoRepository.relatorioDeProdutoQuantidadeEUltimaVenda();
+
+        objects.forEach(object -> {
+            System.out.println("##################################");
+            System.out.println("Produto: " + object[0]);
+            System.out.println("Quantidade: " + object[1]);
+            System.out.println("Ultima Venda: " + object[2]);
+            System.out.println("##################################");
+        });
+    }
+
 }
