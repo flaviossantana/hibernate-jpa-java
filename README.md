@@ -53,6 +53,24 @@ O EclipseLink é a implementação de referência da JPA. Sempre que surge uma n
 - O relacionamento muitos para muitos é onde uma ou mais linhas de uma entidade são associadas a mais de uma linha em outra entidade.
 ![](http://www.tidicas.com.br/wp-content/uploads/2021/03/diagram_class_manytomany.png)
 
+## JPA Query Com Retonro de um NOVO (new) Objeto
+```java
+    @Override
+    public List<RelatorioVendasVO> relatorioDeProdutoQuantidadeEUltimaVenda() {
+
+        StringBuilder jpql = new StringBuilder();
+        jpql.append("SELECT new io.com.store.jpa.vo.RelatorioVendasVO(prd.nome, SUM(itn.quantidade), MAX(pdd.data)) ");
+        jpql.append("FROM Pedido pdd ");
+        jpql.append("JOIN pdd.itens itn ");
+        jpql.append("JOIN itn.produto prd ");
+        jpql.append("GROUP BY prd.nome ");
+        jpql.append("ORDER BY SUM(itn.quantidade) DESC ");
+
+        return entityManager
+                .createQuery(jpql.toString(), RelatorioVendasVO.class)
+                .getResultList();
+    }
+```
 
 ### Referências
 - https://github.com/flaviossantana/hibernate-jpa-java
