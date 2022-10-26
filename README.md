@@ -28,12 +28,35 @@ O EclipseLink é a implementação de referência da JPA. Sempre que surge uma n
 
 ![](https://github.com/flaviossantana/hibernate-jpa-java/blob/main/src/main/resources/asset/ciclo-e-vida-jpa.png?raw=true)  
 
-## Mapeamento de Entidades
+## One to One (@OneToOne)
+- A anotação para mapear uma única entidade para uma única outra entidade é @OneToOne.
+![](http://www.tidicas.com.br/wp-content/uploads/2021/03/diagram_class_onetoone.png)
 
+## Many to One (@ManyToOne)
+- Relação ManyToOne entre entidades: onde uma entidade é referenciada com outra entidade que contém valores únicos. Em bancos de dados relacionais, esses relacionamentos são aplicáveis usando chave estrangeira/chave primária entre as tabelas.
+```java
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private Categoria categoria;
+```
+
+![](http://www.tidicas.com.br/wp-content/uploads/2021/03/diagram_class_manytoone.png)
+
+## One to Many (@OneToMany)
+- Neste relacionamento, cada linha de uma entidade é referenciada a muitos registros filho em outra entidade. O importante é que os registros de filhos não podem ter vários pais.
+```java
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    private List<Pedido> pedidos = new ArrayList<>();
+```
+![](http://www.tidicas.com.br/wp-content/uploads/2021/03/diagram_class_onetomany.png)
+
+## Many to Many (@ManyToMany)
+- O relacionamento muitos para muitos é onde uma ou mais linhas de uma entidade são associadas a mais de uma linha em outra entidade.
+![](http://www.tidicas.com.br/wp-content/uploads/2021/03/diagram_class_manytomany.png)
 
 
 ### Referências
 - https://github.com/flaviossantana/hibernate-jpa-java
 - https://dfilitto.com.br/desenvolvimento/jpa-o-que-e-para-que-serve-como-implementar-um-sistema
 - https://acervolima.com/ciclo-de-vida-do-hibernate
+- https://www.tidicas.com.br/?p=2058
 
