@@ -2,6 +2,7 @@ package io.com.store.jpa.dao;
 
 import io.com.store.jpa.dao.repository.PedidoRepository;
 import io.com.store.jpa.entity.Pedido;
+import io.com.store.jpa.vo.RelatorioVendasVO;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -43,10 +44,10 @@ public class PedidoDAO implements PedidoRepository {
     }
 
     @Override
-    public List<Object[]> relatorioDeProdutoQuantidadeEUltimaVenda() {
+    public List<RelatorioVendasVO> relatorioDeProdutoQuantidadeEUltimaVenda() {
 
         StringBuilder jpql = new StringBuilder();
-        jpql.append("SELECT prd.nome, SUM(itn.quantidade), MAX(pdd.data) ");
+        jpql.append("SELECT new io.com.store.jpa.vo.RelatorioVendasVO(prd.nome, SUM(itn.quantidade), MAX(pdd.data)) ");
         jpql.append("FROM Pedido pdd ");
         jpql.append("JOIN pdd.itens itn ");
         jpql.append("JOIN itn.produto prd ");
@@ -54,7 +55,7 @@ public class PedidoDAO implements PedidoRepository {
         jpql.append("ORDER BY SUM(itn.quantidade) DESC ");
 
         return entityManager
-                .createQuery(jpql.toString(), Object[].class)
+                .createQuery(jpql.toString(), RelatorioVendasVO.class)
                 .getResultList();
     }
 

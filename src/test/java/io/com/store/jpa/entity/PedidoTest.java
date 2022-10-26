@@ -6,6 +6,7 @@ import io.com.store.jpa.builder.ProdutoBuilder;
 import io.com.store.jpa.dao.PedidoDAO;
 import io.com.store.jpa.dao.repository.PedidoRepository;
 import io.com.store.jpa.dao.util.JPAUtil;
+import io.com.store.jpa.vo.RelatorioVendasVO;
 import junit.framework.TestCase;
 
 import javax.persistence.EntityManager;
@@ -101,15 +102,9 @@ public class PedidoTest extends TestCase {
         pedidoRepository.salvar(pedido);
         em.getTransaction().commit();
 
-        List<Object[]> objects = pedidoRepository.relatorioDeProdutoQuantidadeEUltimaVenda();
+        List<RelatorioVendasVO> relatorioVendasVOS = pedidoRepository.relatorioDeProdutoQuantidadeEUltimaVenda();
 
-        objects.forEach(object -> {
-            System.out.println("##################################");
-            System.out.println("Produto: " + object[0]);
-            System.out.println("Quantidade: " + object[1]);
-            System.out.println("Ultima Venda: " + object[2]);
-            System.out.println("##################################");
-        });
+        relatorioVendasVOS.forEach(System.out::println);
     }
 
 }
