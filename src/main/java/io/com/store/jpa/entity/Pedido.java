@@ -18,7 +18,7 @@ public class Pedido {
     private LocalDateTime data = LocalDateTime.now();
 
     @Column(name = "vlr_total")
-    private BigDecimal total;
+    private BigDecimal valorTotal = BigDecimal.ZERO;
 
     @ManyToOne
     private Cliente cliente;
@@ -42,8 +42,8 @@ public class Pedido {
         return data;
     }
 
-    public BigDecimal getTotal() {
-        return total;
+    public BigDecimal getValorTotal() {
+        return valorTotal;
     }
 
     public Cliente getCliente() {
@@ -55,14 +55,9 @@ public class Pedido {
     }
 
     public void addItem(ItemPedido item) {
+        this.valorTotal = this.valorTotal.add(item.getValorUnitario());
         item.setPedido(this);
         this.itens.add(item);
-    }
-
-
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setCliente(Cliente cliente) {

@@ -153,6 +153,8 @@ public class ProdutoTest extends TestCase {
         EntityManager em = JPAUtil.getEntityManager();
         ProdutoRepository produtoRepository = new ProdutoDAO(em);
 
+        produtoRepository.buscarTodos().forEach(p -> produtoRepository.excluir(p));
+
         Produto galaxyS21Plus = ProdutoBuilder.init()
                 .nome("GALAXY S21+")
                 .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
@@ -194,7 +196,7 @@ public class ProdutoTest extends TestCase {
         ProdutoRepository produtoRepository = new ProdutoDAO(em);
 
         Produto galaxyS21Plus = ProdutoBuilder.init()
-                .nome("GALAXY S21+")
+                .nome("GALAXY S21+ BY NAME")
                 .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
                 .preco("1000.00")
                 .build();
@@ -209,7 +211,7 @@ public class ProdutoTest extends TestCase {
         produtoRepository.salvar(galaxyS21Plus);
         produtoRepository.salvar(galaxyS21Ultra);
 
-        List<Produto> produtos = produtoRepository.buscarPorNome("GALAXY S21+");
+        List<Produto> produtos = produtoRepository.buscarPorNome("GALAXY S21+ BY NAME");
         em.close();
 
         assertNotNull(produtos);

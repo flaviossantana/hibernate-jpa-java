@@ -38,4 +38,8 @@ public class ItemPedido {
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
+
+    public BigDecimal getValorUnitario() {
+        return valorUnitario.multiply(new BigDecimal(quantidade));
+    }
 }

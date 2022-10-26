@@ -4,6 +4,7 @@ import io.com.store.jpa.dao.repository.PedidoRepository;
 import io.com.store.jpa.entity.Pedido;
 
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class PedidoDAO implements PedidoRepository {
@@ -41,5 +42,13 @@ public class PedidoDAO implements PedidoRepository {
                 .createQuery("SELECT p FROM Pedido p", Pedido.class)
                 .getResultList();
     }
+
+    @Override
+    public BigDecimal valorTotalDeTodasAsVendas() {
+        String jpql = "SELECT SUM(p.valorTotal) FROM Pedido p";
+        return entityManager.createQuery(jpql, BigDecimal.class)
+                .getSingleResult();
+    }
+
 
 }
