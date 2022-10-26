@@ -10,6 +10,7 @@ import io.com.store.jpa.vo.RelatorioVendasVO;
 import junit.framework.TestCase;
 
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class PedidoTest extends TestCase {
@@ -78,7 +79,39 @@ public class PedidoTest extends TestCase {
         PedidoRepository pedidoRepository = new PedidoDAO(em);
         pedidoRepository.salvar(pedido);
         em.getTransaction().commit();
+    }
 
+    public void testeDeveriaSomarTotalDeTodasAsVendas(){
+
+
+
+        Pedido pedidoSeisMil = PedidoBuilder
+                .init()
+                .cliente(joaoDaSilva)
+                .item(1, galaxyS21Plus)
+                .item(2, galaxyS21Ultra)
+                .build();
+
+        Pedido pedidoDozeMil = PedidoBuilder
+                .init()
+                .cliente(joaoDaSilva)
+                .item(1, galaxyS21Plus)
+                .item(3, galaxyS21Plus)
+                .item(2, galaxyS21Ultra)
+                .item(4, galaxyS21Ultra)
+                .build();
+
+        em.getTransaction().begin();
+        PedidoRepository pedidoRepository = new PedidoDAO(em);
+
+        pedidoRepository.buscarTodos().forEach(p -> pedidoRepository.excluir(p));
+
+        pedidoRepository.salvar(pedidoSeisMil);
+        pedidoRepository.salvar(pedidoDozeMil);
+        em.getTransaction().commit();
+
+        BigDecimal totalVendido = pedidoRepository.valorTotalDeTodasAsVendas();
+        assertEquals(new BigDecimal("45000.00"), totalVendido);
     }
 
     public void testeDeveriaExecutarRelatorioDeProdutoQuantidadeEUltimaVenda(){
@@ -106,5 +139,6 @@ public class PedidoTest extends TestCase {
 
         relatorioVendasVOS.forEach(System.out::println);
     }
+
 
 }
