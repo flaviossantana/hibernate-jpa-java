@@ -34,10 +34,19 @@ O EclipseLink é a implementação de referência da JPA. Sempre que surge uma n
 
 ## Many to One (@ManyToOne)
 - Relação ManyToOne entre entidades: onde uma entidade é referenciada com outra entidade que contém valores únicos. Em bancos de dados relacionais, esses relacionamentos são aplicáveis usando chave estrangeira/chave primária entre as tabelas.
+```java
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private Categoria categoria;
+```
+
 ![](http://www.tidicas.com.br/wp-content/uploads/2021/03/diagram_class_manytoone.png)
 
 ## One to Many (@OneToMany)
 - Neste relacionamento, cada linha de uma entidade é referenciada a muitos registros filho em outra entidade. O importante é que os registros de filhos não podem ter vários pais.
+```java
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    private List<Pedido> pedidos = new ArrayList<>();
+```
 ![](http://www.tidicas.com.br/wp-content/uploads/2021/03/diagram_class_onetomany.png)
 
 ## Many to Many (@ManyToMany)
