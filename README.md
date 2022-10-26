@@ -72,6 +72,13 @@ O EclipseLink é a implementação de referência da JPA. Sempre que surge uma n
     }
 ```
 
+## Evitando Joins descenessários em anotações com ToOne
+- Para evitar que o Hibernate faça joins desnecessários, podemos usar a anotação @Fetch(FetchMode.JOIN) para evitar que o Hibernate faça joins desnecessários.
+```java
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Categoria categoria;
+```
+
 ### Referências
 - https://github.com/flaviossantana/hibernate-jpa-java
 - https://dfilitto.com.br/desenvolvimento/jpa-o-que-e-para-que-serve-como-implementar-um-sistema
