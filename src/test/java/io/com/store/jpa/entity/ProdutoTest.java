@@ -334,5 +334,32 @@ public class ProdutoTest extends TestCase {
         assertEquals(galaxyS21Plus.getPreco(), preco);
     }
 
+    public void testDeveriaBuscarPrecoDoProdutoComNomeNamedQuery(){
+        EntityManager em = JPAUtil.getEntityManager();
+        ProdutoRepository produtoRepository = new ProdutoDAO(em);
+
+        Produto galaxyS21Plus = ProdutoBuilder.init()
+                .nome("GALAXY S21+")
+                .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
+                .preco("1000.00")
+                .build();
+
+        Produto galaxyS21Ultra = ProdutoBuilder.init()
+                .nome("GALAXY S21 Ultra")
+                .descricao("SMARTPHONE SAMSUMG GALAXY S21 Ultra 512GB")
+                .preco("5000.00")
+                .build();
+
+        em.getTransaction().begin();
+        produtoRepository.salvar(galaxyS21Plus);
+        produtoRepository.salvar(galaxyS21Ultra);
+
+        BigDecimal preco = produtoRepository.buscarPrecoPorNomeNamedQuery(galaxyS21Plus.getNome());
+        em.close();
+
+        assertNotNull(preco);
+        assertEquals(galaxyS21Plus.getPreco(), preco);
+    }
+
 
 }

@@ -14,5 +14,7 @@ public interface ProdutoRepository extends BaseRepository<Produto> {
     List<Produto> buscarPorNomeCategoria(String nome);
 
     BigDecimal buscarPrecoPorNome(String nome);
+
+    BigDecimal buscarPrecoPorNomeNamedQuery(String nome);
 }
 
