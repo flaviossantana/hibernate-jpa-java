@@ -34,7 +34,10 @@ public class PedidoDAO implements PedidoRepository {
 
     @Override
     public Pedido buscarPorId(long id) {
-        return entityManager.find(Pedido.class, id);
+        return entityManager
+                .createQuery("SELECT p FROM Pedido p WHERE p.id = :id", Pedido.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
 
     @Override
@@ -67,5 +70,12 @@ public class PedidoDAO implements PedidoRepository {
                 .getSingleResult();
     }
 
+    @Override
+    public Pedido buscarPedidoComCliente(Long id) {
+        return entityManager
+                .createQuery("SELECT p FROM Pedido p JOIN FETCH p.cliente WHERE p.id = :id", Pedido.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 
 }
