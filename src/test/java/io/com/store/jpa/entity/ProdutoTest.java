@@ -2,6 +2,7 @@ package io.com.store.jpa.entity;
 
 import io.com.store.jpa.builder.ProdutoBuilder;
 import io.com.store.jpa.dao.CategoriaDAO;
+import io.com.store.jpa.dao.PedidoDAO;
 import io.com.store.jpa.dao.ProdutoDAO;
 import io.com.store.jpa.dao.repository.CategoriaRepository;
 import io.com.store.jpa.dao.repository.ProdutoRepository;
@@ -151,10 +152,17 @@ public class ProdutoTest extends TestCase {
     public void testDeveriaBucarTodos() {
 
         EntityManager em = JPAUtil.getEntityManager();
-        ProdutoRepository produtoRepository = new ProdutoDAO(em);
-
         em.getTransaction().begin();
+
+        PedidoDAO pedidoDAO = new PedidoDAO(em);
+        pedidoDAO.buscarTodos().forEach(pedido -> pedidoDAO.excluir(pedido));
+
+        ProdutoRepository produtoRepository = new ProdutoDAO(em);
         produtoRepository.buscarTodos().forEach(p -> produtoRepository.excluir(p));
+
+        em.flush();
+        em.getTransaction().commit();
+
 
         Produto galaxyS21Plus = ProdutoBuilder.init()
                 .nome("GALAXY S21+")
@@ -168,6 +176,7 @@ public class ProdutoTest extends TestCase {
                 .preco("5000.00")
                 .build();
 
+        em.getTransaction().begin();
         produtoRepository.salvar(galaxyS21Plus);
         produtoRepository.salvar(galaxyS21Ultra);
         em.flush();
@@ -266,14 +275,14 @@ public class ProdutoTest extends TestCase {
                 .nome("GALAXY S21+")
                 .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
                 .preco("1000.00")
-                .nomeCategoria("CELULARES")
+                .nomeCategoria("CELULARES TOP")
                 .build();
 
         Produto galaxyS21Ultra = ProdutoBuilder.init()
                 .nome("GALAXY S21 Ultra")
                 .descricao("SMARTPHONE SAMSUMG GALAXY S21 Ultra 512GB")
                 .preco("5000.00")
-                .nomeCategoria("CELULARES")
+                .nomeCategoria("CELULARES TOP")
                 .build();
 
         Produto macbookPro = ProdutoBuilder.init()

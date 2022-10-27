@@ -1,8 +1,6 @@
 package io.com.store.jpa.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "clientes")
@@ -12,22 +10,18 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "desc_nome")
-    private String nome;
+    @Embedded
+    private DadosPessoais dadosPessoais;
 
-    @Column(name = "numr_cpf")
-    private String cpf;
-
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
-    private List<Pedido> pedidos = new ArrayList<>();
+//    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+//    private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente() {
-        super();
+        this.dadosPessoais = new DadosPessoais();
     }
 
     public Cliente(String nome, String cpf) {
-        this.nome = nome;
-        this.cpf = cpf;
+        this.dadosPessoais = new DadosPessoais(nome, cpf);
     }
 
     public Long getId() {
@@ -35,26 +29,19 @@ public class Cliente {
     }
 
     public String getNome() {
-        return nome;
+        return this.dadosPessoais.getNome();
     }
 
     public String getCpf() {
-        return cpf;
-    }
-
-    public void addPedido(Pedido pedido) {
-        this.pedidos.add(pedido);
+        return this.dadosPessoais.getCpf();
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.dadosPessoais.setNome(nome);
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        this.dadosPessoais.setCpf(cpf);
     }
 
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
 }
