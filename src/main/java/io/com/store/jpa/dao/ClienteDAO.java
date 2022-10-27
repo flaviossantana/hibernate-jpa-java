@@ -1,7 +1,7 @@
 package io.com.store.jpa.dao;
 
 import io.com.store.jpa.dao.repository.ClienteRepository;
-import io.com.store.jpa.entity.Cliente;
+import io.com.store.jpa.entity.pessoa.Cliente;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

@@ -1,9 +1,9 @@
 package io.com.store.jpa.builder;
 
-import io.com.store.jpa.entity.Cliente;
+import io.com.store.jpa.entity.pessoa.Cliente;
 import io.com.store.jpa.entity.ItemPedido;
 import io.com.store.jpa.entity.Pedido;
-import io.com.store.jpa.entity.Produto;
+import io.com.store.jpa.entity.produto.Produto;
 
 public class PedidoBuilder {
 

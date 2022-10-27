@@ -1,4 +1,4 @@
-package io.com.store.jpa.entity;
+package io.com.store.jpa.entity.produto;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

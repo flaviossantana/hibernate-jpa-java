@@ -1,5 +1,7 @@
 package io.com.store.jpa.entity;
 
+import io.com.store.jpa.entity.pessoa.Cliente;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

@@ -3,9 +3,9 @@ package io.com.store.jpa.dao;
 import io.com.store.jpa.builder.ClienteBuilder;
 import io.com.store.jpa.dao.repository.ClienteRepository;
 import io.com.store.jpa.dao.util.JPAUtil;
-import io.com.store.jpa.entity.Cliente;
+import io.com.store.jpa.entity.pessoa.Cliente;
 import io.com.store.jpa.entity.DadosPessoais;
-import io.com.store.jpa.entity.Vendedor;
+import io.com.store.jpa.entity.pessoa.Vendedor;
 import junit.framework.TestCase;
 
 import javax.persistence.EntityManager;

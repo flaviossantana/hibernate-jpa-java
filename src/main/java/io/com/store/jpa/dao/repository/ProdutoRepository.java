@@ -1,6 +1,6 @@
 package io.com.store.jpa.dao.repository;
 
-import io.com.store.jpa.entity.Produto;
+import io.com.store.jpa.entity.produto.Produto;
 
 import java.math.BigDecimal;
 import java.util.List;

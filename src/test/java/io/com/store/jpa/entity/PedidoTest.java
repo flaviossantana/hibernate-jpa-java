@@ -6,6 +6,8 @@ import io.com.store.jpa.builder.ProdutoBuilder;
 import io.com.store.jpa.dao.PedidoDAO;
 import io.com.store.jpa.dao.repository.PedidoRepository;
 import io.com.store.jpa.dao.util.JPAUtil;
+import io.com.store.jpa.entity.pessoa.Cliente;
+import io.com.store.jpa.entity.produto.Produto;
 import io.com.store.jpa.vo.RelatorioVendasVO;
 import junit.framework.TestCase;
 

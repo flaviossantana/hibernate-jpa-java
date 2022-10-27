@@ -3,7 +3,7 @@ package io.com.store.jpa.builder;
 import io.com.store.jpa.dao.ProdutoDAO;
 import io.com.store.jpa.dao.repository.ProdutoRepository;
 import io.com.store.jpa.entity.Categoria;
-import io.com.store.jpa.entity.Produto;
+import io.com.store.jpa.entity.produto.Produto;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;

@@ -1,4 +1,6 @@
-package io.com.store.jpa.entity;
+package io.com.store.jpa.entity.pessoa;
+
+import io.com.store.jpa.entity.DadosPessoais;
 
 import javax.persistence.*;
 

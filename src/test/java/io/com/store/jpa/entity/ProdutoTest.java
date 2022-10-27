@@ -7,6 +7,9 @@ import io.com.store.jpa.dao.ProdutoDAO;
 import io.com.store.jpa.dao.repository.CategoriaRepository;
 import io.com.store.jpa.dao.repository.ProdutoRepository;
 import io.com.store.jpa.dao.util.JPAUtil;
+import io.com.store.jpa.entity.produto.Informatica;
+import io.com.store.jpa.entity.produto.Livro;
+import io.com.store.jpa.entity.produto.Produto;
 import junit.framework.TestCase;
 
 import javax.persistence.EntityManager;

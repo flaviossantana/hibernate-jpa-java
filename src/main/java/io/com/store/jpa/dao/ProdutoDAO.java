@@ -1,7 +1,7 @@
 package io.com.store.jpa.dao;
 
 import io.com.store.jpa.dao.repository.ProdutoRepository;
-import io.com.store.jpa.entity.Produto;
+import io.com.store.jpa.entity.produto.Produto;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
