@@ -82,4 +82,75 @@ public class ClienteDAOTest extends TestCase {
         clientes.forEach(cliente -> assertNotNull(cliente.getNome()));
     }
 
+    public void testDeveriaBuscarClienteCriteriaPorNome() {
+
+        EntityManager entityManager = JPAUtil.getEntityManager();
+        entityManager.getTransaction().begin();
+
+        Cliente joaoDaSilva = ClienteBuilder
+                .init()
+                .nome("João da Silva")
+                .cpf("00784452109")
+                .persisted(entityManager)
+                .build();
+
+        entityManager.flush();
+
+        ClienteRepository clienteRepository = new ClienteDAO(entityManager);
+        List<Cliente> clientes = clienteRepository.buscarClientesCriteria(joaoDaSilva.getNome(), null);
+
+        assertEquals(1, clientes.size());
+        clientes.forEach(cliente -> assertEquals(joaoDaSilva.getNome(), cliente.getNome()));
+
+    }
+
+    public void testDeveriaBuscarClientesCriteriaPorCPF() {
+
+        EntityManager entityManager = JPAUtil.getEntityManager();
+        entityManager.getTransaction().begin();
+
+        Cliente joaoDaSilva = ClienteBuilder
+                .init()
+                .nome("João da Silva")
+                .cpf("00784452109")
+                .persisted(entityManager)
+                .build();
+
+        entityManager.flush();
+
+        ClienteRepository clienteRepository = new ClienteDAO(entityManager);
+        List<Cliente> clientes = clienteRepository.buscarClientesCriteria(null, joaoDaSilva.getCpf());
+
+        assertEquals(1, clientes.size());
+        clientes.forEach(cliente -> assertEquals(joaoDaSilva.getNome(), cliente.getNome()));
+    }
+
+    public void testDeveriaBuscarTodosClientesCriteria() {
+
+        EntityManager entityManager = JPAUtil.getEntityManager();
+        entityManager.getTransaction().begin();
+
+        ClienteBuilder
+                .init()
+                .nome("João da Silva")
+                .cpf("00784452109")
+                .persisted(entityManager)
+                .build();
+
+        ClienteBuilder
+                .init()
+                .nome("Marcin Costa")
+                .cpf("05874412036")
+                .persisted(entityManager)
+                .build();
+
+        entityManager.flush();
+
+        ClienteRepository clienteRepository = new ClienteDAO(entityManager);
+        List<Cliente> clientes = clienteRepository.buscarClientesCriteria(null, null);
+
+        assertEquals(2, clientes.size());
+        clientes.forEach(cliente -> assertNotNull(cliente.getNome()));
+    }
+
 }

@@ -5,6 +5,10 @@ import io.com.store.jpa.entity.Cliente;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class ClienteDAO implements ClienteRepository {
@@ -64,4 +68,28 @@ public class ClienteDAO implements ClienteRepository {
         }
         return query.getResultList();
     }
+
+    @Override
+    public List<Cliente> buscarClientesCriteria(String nome, String cpf) {
+
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Cliente> query = builder.createQuery(Cliente.class);
+        Root<Cliente> from = query.from(Cliente.class);
+
+        Predicate filtro = builder.and();
+
+        if (nome != null && !nome.trim().isEmpty()) {
+            builder.and(filtro, builder.equal(from.get("nome"), nome));
+        }
+        if (cpf != null) {
+            builder.and(filtro, builder.equal(from.get("cpf"), cpf));
+        }
+
+        query.where(filtro);
+
+        return entityManager.createQuery(query).getResultList();
+
+    }
+
+
 }
