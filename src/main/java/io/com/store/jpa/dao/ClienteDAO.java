@@ -79,10 +79,10 @@ public class ClienteDAO implements ClienteRepository {
         Predicate filtro = builder.and();
 
         if (nome != null && !nome.trim().isEmpty()) {
-            builder.and(filtro, builder.equal(from.get("nome"), nome));
+            filtro = builder.and(filtro, builder.equal(from.get("nome"), nome));
         }
         if (cpf != null) {
-            builder.and(filtro, builder.equal(from.get("cpf"), cpf));
+            filtro = builder.and(filtro, builder.equal(from.get("cpf"), cpf));
         }
 
         query.where(filtro);
