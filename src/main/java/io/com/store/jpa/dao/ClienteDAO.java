@@ -4,6 +4,7 @@ import io.com.store.jpa.dao.repository.ClienteRepository;
 import io.com.store.jpa.entity.Cliente;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class ClienteDAO implements ClienteRepository {
@@ -42,4 +43,25 @@ public class ClienteDAO implements ClienteRepository {
                 .getResultList();
     }
 
+    @Override
+    public List<Cliente> buscarClientes(String nome, String cpf) {
+        String jpql = "SELECT c FROM Cliente c WHERE 0=0 ";
+
+        if (nome != null && !nome.trim().isEmpty()) {
+            jpql += "AND c.nome = :nome ";
+        }
+        if (cpf != null) {
+            jpql += " AND c.cpf = :cpf ";
+        }
+
+        TypedQuery<Cliente> query = entityManager.createQuery(jpql, Cliente.class);
+
+        if (nome != null && !nome.trim().isEmpty()) {
+            query.setParameter("nome", nome);
+        }
+        if (cpf != null) {
+            query.setParameter("cpf", cpf);
+        }
+        return query.getResultList();
+    }
 }
