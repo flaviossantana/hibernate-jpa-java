@@ -4,6 +4,8 @@ import io.com.store.jpa.builder.ClienteBuilder;
 import io.com.store.jpa.dao.repository.ClienteRepository;
 import io.com.store.jpa.dao.util.JPAUtil;
 import io.com.store.jpa.entity.Cliente;
+import io.com.store.jpa.entity.DadosPessoais;
+import io.com.store.jpa.entity.Vendedor;
 import junit.framework.TestCase;
 
 import javax.persistence.EntityManager;
@@ -152,5 +154,22 @@ public class ClienteDAOTest extends TestCase {
         assertEquals(2, clientes.size());
         clientes.forEach(cliente -> assertNotNull(cliente.getNome()));
     }
+
+    public void testDeveriaSalvarVendedor() {
+
+        EntityManager entityManager = JPAUtil.getEntityManager();
+        entityManager.getTransaction().begin();
+        ClienteRepository clienteRepository = new ClienteDAO(entityManager);
+
+        Vendedor vendedor = new Vendedor("MT122880800", new DadosPessoais("Marcin Costa", "05874412036"));
+        clienteRepository.salvar(vendedor);
+
+        entityManager.flush();
+        List<Cliente> clientes = clienteRepository.buscarClientes("Marcin Costa", "05874412036");
+
+        assertEquals(1, clientes.size());
+        clientes.forEach(cliente -> assertNotNull(cliente.getNome()));
+    }
+
 
 }

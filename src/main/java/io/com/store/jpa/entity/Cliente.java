@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "clientes")
+@DiscriminatorValue("CLT")
+@DiscriminatorColumn(name = "tipo_cliente", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Cliente {
 
     @Id
@@ -13,19 +16,12 @@ public class Cliente {
     @Embedded
     private DadosPessoais dadosPessoais;
 
-//    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
-//    private List<Pedido> pedidos = new ArrayList<>();
-
     public Cliente() {
         this.dadosPessoais = new DadosPessoais();
     }
 
-    public Cliente(String nome, String cpf) {
-        this.dadosPessoais = new DadosPessoais(nome, cpf);
-    }
-
-    public Long getId() {
-        return id;
+    public Cliente(DadosPessoais dadosPessoais) {
+        this.dadosPessoais = dadosPessoais;
     }
 
     public String getNome() {

@@ -163,7 +163,6 @@ public class ProdutoTest extends TestCase {
         em.flush();
         em.getTransaction().commit();
 
-
         Produto galaxyS21Plus = ProdutoBuilder.init()
                 .nome("GALAXY S21+")
                 .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
@@ -322,7 +321,7 @@ public class ProdutoTest extends TestCase {
         ProdutoRepository produtoRepository = new ProdutoDAO(em);
 
         Produto galaxyS21Plus = ProdutoBuilder.init()
-                .nome("GALAXY S21+")
+                .nome("GALAXY S21+ MAX TOP")
                 .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
                 .preco("1000.00")
                 .build();
@@ -372,5 +371,32 @@ public class ProdutoTest extends TestCase {
         assertEquals(galaxyS21Plus.getPreco(), preco);
     }
 
+    public void testDeveriaSalvarLivro(){
+
+        EntityManager em = JPAUtil.getEntityManager();
+        ProdutoRepository produtoRepository = new ProdutoDAO(em);
+        em.getTransaction().begin();
+
+        Livro livro = new Livro("BRDDA780808180KV", "", 530);
+        produtoRepository.salvar(livro);
+        em.close();
+
+        assertNotNull(livro.getId());
+
+    }
+
+    public void testDeveriaSalvarProdutoDeInformatica(){
+
+        EntityManager em = JPAUtil.getEntityManager();
+        ProdutoRepository produtoRepository = new ProdutoDAO(em);
+        em.getTransaction().begin();
+
+        Informatica celular = new Informatica("SAMSUMG", "Galaxy S21 PLUS Master");
+        produtoRepository.salvar(celular);
+        em.close();
+
+        assertNotNull(celular.getId());
+
+    }
 
 }
