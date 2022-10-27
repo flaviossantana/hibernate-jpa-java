@@ -4,7 +4,7 @@ import io.com.store.jpa.builder.ClienteBuilder;
 import io.com.store.jpa.dao.repository.ClienteRepository;
 import io.com.store.jpa.dao.util.JPAUtil;
 import io.com.store.jpa.entity.pessoa.Cliente;
-import io.com.store.jpa.entity.DadosPessoais;
+import io.com.store.jpa.entity.pessoa.DadosPessoais;
 import io.com.store.jpa.entity.pessoa.Vendedor;
 import junit.framework.TestCase;
 

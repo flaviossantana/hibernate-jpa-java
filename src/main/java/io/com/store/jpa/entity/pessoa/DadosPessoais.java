@@ -1,4 +1,4 @@
-package io.com.store.jpa.entity;
+package io.com.store.jpa.entity.pessoa;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

@@ -1,7 +1,5 @@
 package io.com.store.jpa.entity.pessoa;
 
-import io.com.store.jpa.entity.DadosPessoais;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
