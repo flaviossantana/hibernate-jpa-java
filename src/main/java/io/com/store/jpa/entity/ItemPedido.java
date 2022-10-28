@@ -1,5 +1,7 @@
 package io.com.store.jpa.entity;
 
+import io.com.store.jpa.entity.produto.Produto;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 

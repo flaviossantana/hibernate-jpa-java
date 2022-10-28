@@ -79,7 +79,48 @@ O EclipseLink é a implementação de referência da JPA. Sempre que surge uma n
     private Categoria categoria;
 ```
 
-### Referências
+## Herança com JPA
+- A herança é uma das características mais importantes da orientação a objetos. Ela permite que classes compartilhem atributos e métodos, mas também permite que classes diferentes compartilhem atributos e métodos. A herança é uma das características mais importantes da orientação a objetos. Ela permite que classes compartilhem atributos e métodos, mas também permite que classes diferentes compartilhem atributos e métodos.
+### JOINED:
+- Cria uma tabela para cada classe concreta, e uma tabela para a classe abstrata. Cada tabela concreta contém os atributos da classe concreta e a chave estrangeira da tabela da classe abstrata. A tabela da classe abstrata contém os atributos da classe abstrata e a chave primária.
+
+
+- Classe PAI:
+```java
+@Entity
+@Table(name = "produtos")
+@Inheritance(strategy = InheritanceType.JOINED)
+@NamedQuery(name = "produto.buscarPrecoPorNome", query = "SELECT p.preco FROM Produto p WHERE p.nome = :nome")
+public class Produto {}
+```
+- Classe FILHA:
+```java
+@Entity
+@Table(name = "livros")
+public class Livro extends Produto {}
+```
+
+### SINGLE_TABLE: 
+- Cria uma tabela para a classe abstrata e uma coluna para cada classe concreta. A coluna da classe concreta contém o tipo da classe concreta. A tabela da classe abstrata contém os atributos da classe abstrata e a chave primária.
+
+
+- Classe PAI:
+```java
+@Entity
+@Table(name = "clientes")
+@DiscriminatorValue("CLT")
+@DiscriminatorColumn(name = "tipo_cliente", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Cliente {}
+``` 
+- Classe FILHA:
+```java
+@Entity
+@DiscriminatorValue("VDD")
+public class Vendedor extends Cliente {}
+```
+
+#### Referências
 - https://github.com/flaviossantana/hibernate-jpa-java
 - https://dfilitto.com.br/desenvolvimento/jpa-o-que-e-para-que-serve-como-implementar-um-sistema
 - https://acervolima.com/ciclo-de-vida-do-hibernate

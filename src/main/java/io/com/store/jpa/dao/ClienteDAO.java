@@ -1,14 +1,11 @@
 package io.com.store.jpa.dao;
 
 import io.com.store.jpa.dao.repository.ClienteRepository;
-import io.com.store.jpa.entity.Cliente;
+import io.com.store.jpa.entity.pessoa.Cliente;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 public class ClienteDAO implements ClienteRepository {
@@ -52,10 +49,10 @@ public class ClienteDAO implements ClienteRepository {
         String jpql = "SELECT c FROM Cliente c WHERE 0=0 ";
 
         if (nome != null && !nome.trim().isEmpty()) {
-            jpql += "AND c.nome = :nome ";
+            jpql += "AND c.dadosPessoais.nome = :nome ";
         }
         if (cpf != null) {
-            jpql += " AND c.cpf = :cpf ";
+            jpql += " AND c.dadosPessoais.cpf = :cpf ";
         }
 
         TypedQuery<Cliente> query = entityManager.createQuery(jpql, Cliente.class);
@@ -75,14 +72,15 @@ public class ClienteDAO implements ClienteRepository {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Cliente> query = builder.createQuery(Cliente.class);
         Root<Cliente> from = query.from(Cliente.class);
+        Path<Object> dadosPessoais = from.get("dadosPessoais");
 
         Predicate filtro = builder.and();
 
         if (nome != null && !nome.trim().isEmpty()) {
-            filtro = builder.and(filtro, builder.equal(from.get("nome"), nome));
+            filtro = builder.and(filtro, builder.equal(dadosPessoais.get("nome"), nome));
         }
         if (cpf != null) {
-            filtro = builder.and(filtro, builder.equal(from.get("cpf"), cpf));
+            filtro = builder.and(filtro, builder.equal(dadosPessoais.get("cpf"), cpf));
         }
 
         query.where(filtro);

@@ -1,7 +1,7 @@
 package io.com.store.jpa.dao;
 
 import io.com.store.jpa.dao.repository.ProdutoRepository;
-import io.com.store.jpa.entity.Produto;
+import io.com.store.jpa.entity.produto.Produto;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -54,7 +54,7 @@ public class ProdutoDAO implements ProdutoRepository {
     @Override
     public List<Produto> buscarPorNomeCategoria(String nome) {
         return entityManager
-                .createQuery("SELECT p FROM Produto p WHERE p.categoria.nome = :nome", Produto.class)
+                .createQuery("SELECT p FROM Produto p WHERE p.categoria.id.nome = :nome", Produto.class)
                 .setParameter("nome", nome)
                 .getResultList();
     }

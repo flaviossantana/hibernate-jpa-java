@@ -1,4 +1,6 @@
-package io.com.store.jpa.entity;
+package io.com.store.jpa.entity.produto;
+
+import io.com.store.jpa.entity.categoria.Categoria;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -6,6 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "produtos")
+@Inheritance(strategy = InheritanceType.JOINED)
 @NamedQuery(name = "produto.buscarPrecoPorNome", query = "SELECT p.preco FROM Produto p WHERE p.nome = :nome")
 public class Produto {
 
@@ -25,7 +28,7 @@ public class Produto {
     @Column(name = "data_cadastro")
     private LocalDate dataCadastro = LocalDate.now();
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 
     public Produto() {
