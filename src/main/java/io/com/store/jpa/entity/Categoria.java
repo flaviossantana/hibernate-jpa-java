@@ -10,6 +10,8 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    
+
     @Column(name = "desc_nome")
     private String nome;
 
