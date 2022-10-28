@@ -27,11 +27,10 @@ public class PedidoTest extends TestCase {
         this.em.getTransaction().begin();
         criarProdutos();
         criarCliente();
-        this.em.getTransaction().commit();
     }
 
     protected void tearDown()  {
-        em.close();
+        this.em.getTransaction().commit();
     }
 
     private void criarCliente() {
@@ -77,15 +76,11 @@ public class PedidoTest extends TestCase {
                 .item(2, galaxyS21Ultra)
                 .build();
 
-        em.getTransaction().begin();
         PedidoRepository pedidoRepository = new PedidoDAO(em);
         pedidoRepository.salvar(pedido);
-        em.getTransaction().commit();
     }
 
     public void testeDeveriaSomarTotalDeTodasAsVendas(){
-
-
 
         Pedido pedidoSeisMil = PedidoBuilder
                 .init()
@@ -103,14 +98,12 @@ public class PedidoTest extends TestCase {
                 .item(4, galaxyS21Ultra)
                 .build();
 
-        em.getTransaction().begin();
         PedidoRepository pedidoRepository = new PedidoDAO(em);
 
         pedidoRepository.buscarTodos().forEach(p -> pedidoRepository.excluir(p));
 
         pedidoRepository.salvar(pedidoSeisMil);
         pedidoRepository.salvar(pedidoDozeMil);
-        em.getTransaction().commit();
 
         BigDecimal totalVendido = pedidoRepository.valorTotalDeTodasAsVendas();
         assertEquals(new BigDecimal("45000.00"), totalVendido);
@@ -132,10 +125,8 @@ public class PedidoTest extends TestCase {
                         .build())
                 .build();
 
-        em.getTransaction().begin();
         PedidoRepository pedidoRepository = new PedidoDAO(em);
         pedidoRepository.salvar(pedido);
-        em.getTransaction().commit();
 
         List<RelatorioVendasVO> relatorioVendasVOS = pedidoRepository.relatorioDeProdutoQuantidadeEUltimaVenda();
 

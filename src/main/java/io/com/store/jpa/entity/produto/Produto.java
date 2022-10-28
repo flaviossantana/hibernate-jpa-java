@@ -1,6 +1,6 @@
 package io.com.store.jpa.entity.produto;
 
-import io.com.store.jpa.entity.Categoria;
+import io.com.store.jpa.entity.categoria.Categoria;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -28,7 +28,7 @@ public class Produto {
     @Column(name = "data_cadastro")
     private LocalDate dataCadastro = LocalDate.now();
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 
     public Produto() {

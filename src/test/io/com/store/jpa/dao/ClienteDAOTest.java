@@ -17,10 +17,15 @@ public class ClienteDAOTest extends TestCase {
     private EntityManager em;
     private Cliente joaoDaSilva;
 
+    @Override
     public void setUp() {
         this.em = JPAUtil.getEntityManager();
         this.em.getTransaction().begin();
         excluirConteudoBancoDeDados();
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
         this.em.getTransaction().commit();
     }
 
@@ -50,8 +55,6 @@ public class ClienteDAOTest extends TestCase {
 
     public void testDeveriaBuscarClientesPorNome() {
 
-        em.getTransaction().begin();
-
         ClienteRepository clienteRepository = new ClienteDAO(em);
         criarClientenJoaoDaSilvaPadrao();
 
@@ -59,12 +62,9 @@ public class ClienteDAOTest extends TestCase {
 
         assertEquals(1, clientes.size());
         clientes.forEach(cliente -> assertEquals(joaoDaSilva.getNome(), cliente.getNome()));
-        em.getTransaction().commit();
     }
 
     public void testDeveriaBuscarClientesCriteriaPorCPF() {
-
-        em.getTransaction().begin();
 
         criarClientenJoaoDaSilvaPadrao();
 
@@ -73,12 +73,9 @@ public class ClienteDAOTest extends TestCase {
 
         assertEquals(1, clientes.size());
         clientes.forEach(cliente -> assertEquals(joaoDaSilva.getNome(), cliente.getNome()));
-        em.getTransaction().commit();
     }
 
     public void testDeveriaBuscarClientesPorCPF() {
-
-        em.getTransaction().begin();
 
         criarClientenJoaoDaSilvaPadrao();
 
@@ -87,12 +84,9 @@ public class ClienteDAOTest extends TestCase {
 
         assertEquals(1, clientes.size());
         clientes.forEach(cliente -> assertEquals(joaoDaSilva.getNome(), cliente.getNome()));
-        em.getTransaction().commit();
     }
 
     public void testDeveriaBuscarTodosClientes() {
-
-        em.getTransaction().begin();
 
         criarClientenJoaoDaSilvaPadrao();
 
@@ -108,12 +102,9 @@ public class ClienteDAOTest extends TestCase {
 
         assertEquals(2, clientes.size());
         clientes.forEach(cliente -> assertNotNull(cliente.getNome()));
-        em.getTransaction().commit();
     }
 
     public void testDeveriaBuscarClienteCriteriaPorNome() {
-
-        em.getTransaction().begin();
 
         criarClientenJoaoDaSilvaPadrao();
 
@@ -122,12 +113,9 @@ public class ClienteDAOTest extends TestCase {
 
         assertEquals(1, clientes.size());
         clientes.forEach(cliente -> assertEquals(joaoDaSilva.getNome(), cliente.getNome()));
-        em.getTransaction().commit();
     }
 
     public void testDeveriaBuscarTodosClientesCriteria() {
-
-        em.getTransaction().begin();
 
         criarClientenJoaoDaSilvaPadrao();
 
@@ -148,8 +136,6 @@ public class ClienteDAOTest extends TestCase {
 
     public void testDeveriaSalvarVendedor() {
 
-        em.getTransaction().begin();
-
         Vendedor vendedor = new Vendedor("MT122880800", new DadosPessoais("Marcin Costa", "05874412036"));
 
         ClienteRepository clienteRepository = new ClienteDAO(em);
@@ -158,7 +144,6 @@ public class ClienteDAOTest extends TestCase {
 
         assertEquals(1, clientes.size());
         clientes.forEach(cliente -> assertNotNull(cliente.getNome()));
-        em.getTransaction().commit();
     }
 
 

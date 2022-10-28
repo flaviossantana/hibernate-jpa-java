@@ -10,6 +10,7 @@ import io.com.store.jpa.dao.repository.ClienteRepository;
 import io.com.store.jpa.dao.repository.PedidoRepository;
 import io.com.store.jpa.dao.repository.ProdutoRepository;
 import io.com.store.jpa.dao.util.JPAUtil;
+import io.com.store.jpa.entity.categoria.Categoria;
 import io.com.store.jpa.entity.produto.Informatica;
 import io.com.store.jpa.entity.produto.Livro;
 import io.com.store.jpa.entity.produto.Produto;
@@ -33,6 +34,11 @@ public class ProdutoTest extends TestCase {
         criarProdutoPadrao();
     }
 
+    @Override
+    protected void tearDown() throws Exception {
+        this.em.getTransaction().commit();
+    }
+
     private void excluirDados() {
         PedidoRepository pedidoRepository = new PedidoDAO(em);
         pedidoRepository.buscarTodos().forEach(pedido -> pedidoRepository.excluir(pedido));
@@ -42,11 +48,6 @@ public class ProdutoTest extends TestCase {
 
         ProdutoRepository produtoRepository = new ProdutoDAO(em);
         produtoRepository.buscarTodos().forEach(produto -> produtoRepository.excluir(produto));
-    }
-
-    @Override
-    protected void tearDown() throws Exception {
-        this.em.getTransaction().commit();
     }
 
     private void criarProdutoPadrao() {
@@ -165,18 +166,23 @@ public class ProdutoTest extends TestCase {
 
         ProdutoRepository produtoRepository = new ProdutoDAO(em);
 
+        CategoriaRepository categoriaRepository = new CategoriaDAO(em);
+        Categoria celularesTop = new Categoria("CELULARES TOP");
+        categoriaRepository.salvar(celularesTop);
+
+
         Produto galaxyS21PlusComCategoria = ProdutoBuilder.init()
                 .nome("GALAXY S21+")
                 .descricao("SMARTPHONE SAMSUMG GALAXY S21+ 256GB")
                 .preco("1000.00")
-                .nomeCategoria("CELULARES TOP")
+                .categoria(celularesTop)
                 .build();
 
         Produto galaxyS21UltraComCategoria = ProdutoBuilder.init()
                 .nome("GALAXY S21 Ultra")
                 .descricao("SMARTPHONE SAMSUMG GALAXY S21 Ultra 512GB")
                 .preco("5000.00")
-                .nomeCategoria("CELULARES TOP")
+                .categoria(celularesTop)
                 .build();
 
         Produto macbookPro = ProdutoBuilder.init()
@@ -189,6 +195,7 @@ public class ProdutoTest extends TestCase {
         produtoRepository.salvar(galaxyS21PlusComCategoria);
         produtoRepository.salvar(galaxyS21UltraComCategoria);
         produtoRepository.salvar(macbookPro);
+
 
         List<Produto> produtos = produtoRepository.buscarPorNomeCategoria(galaxyS21PlusComCategoria.getNomeCategoria());
 
