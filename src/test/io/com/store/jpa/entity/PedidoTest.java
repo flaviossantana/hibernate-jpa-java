@@ -78,6 +78,7 @@ public class PedidoTest extends TestCase {
 
         PedidoRepository pedidoRepository = new PedidoDAO(em);
         pedidoRepository.salvar(pedido);
+        assertNotNull(pedido.getId());
     }
 
     public void testeDeveriaSomarTotalDeTodasAsVendas(){
@@ -100,7 +101,7 @@ public class PedidoTest extends TestCase {
 
         PedidoRepository pedidoRepository = new PedidoDAO(em);
 
-        pedidoRepository.buscarTodos().forEach(p -> pedidoRepository.excluir(p));
+        pedidoRepository.buscarTodos().forEach(pedidoRepository::excluir);
 
         pedidoRepository.salvar(pedidoSeisMil);
         pedidoRepository.salvar(pedidoDozeMil);
@@ -131,6 +132,7 @@ public class PedidoTest extends TestCase {
         List<RelatorioVendasVO> relatorioVendasVOS = pedidoRepository.relatorioDeProdutoQuantidadeEUltimaVenda();
 
         relatorioVendasVOS.forEach(System.out::println);
+        assertNotNull(relatorioVendasVOS);
     }
 
 

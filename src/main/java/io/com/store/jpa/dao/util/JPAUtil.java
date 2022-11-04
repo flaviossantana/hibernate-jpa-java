@@ -5,6 +5,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class JPAUtil {
+
+    private JPAUtil() {
+        super();
+    }
+
     public static final String PERSISTENCE_UNIT_NAME = "store-jpa";
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 

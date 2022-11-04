@@ -3,13 +3,12 @@ package io.com.store.jpa.dao;
 import io.com.store.jpa.dao.repository.CategoriaRepository;
 import io.com.store.jpa.entity.categoria.Categoria;
 import io.com.store.jpa.entity.categoria.CategoriaID;
-import io.com.store.jpa.entity.pessoa.Cliente;
 
 import javax.persistence.EntityManager;
 
 public class CategoriaDAO implements CategoriaRepository {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     public CategoriaDAO(EntityManager entityManager) {
         this.entityManager = entityManager;
